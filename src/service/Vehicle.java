@@ -70,7 +70,32 @@ public abstract class Vehicle {
 	
 	//3. constructors
 	
+	public Vehicle() {
+		setId();
+		setTitle("Default vehicle");
+		setCode();
+		setQuantity(1);
+		setPrice(9999.99f);
+		setEnergyType(EnergyType.not_specified);
+	}
+	
+	public Vehicle(String title, float price, int quantity, EnergyType type)
+	{
+		setId();
+		setTitle(title);
+		setCode();
+		setQuantity(quantity);
+		setPrice(price);
+		setEnergyType(type);
+		
+		
+	}
+	
 	//4. toString
+	public String toString()
+	{
+		return id + ": " + title + "(" + code + "), " + price + " eur [" + quantity + "], " + energyType;
+	}
 	
 
 }
