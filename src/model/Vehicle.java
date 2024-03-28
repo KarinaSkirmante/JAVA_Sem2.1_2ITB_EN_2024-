@@ -1,6 +1,4 @@
-package service;
-
-import model.EnergyType;
+package model;
 
 public abstract class Vehicle {
 	//1. variables
