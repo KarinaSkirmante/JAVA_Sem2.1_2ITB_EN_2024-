@@ -52,12 +52,24 @@ public class MainService {
 			for(Vehicle tempV : allVehicles) {
 				System.out.println(tempV.getClass().getName() + "->" + tempV);
 			}
+			System.out.println("---------------AFTER UPDATE-----------");
+			updateBusById(0, 10001 , 3, EnergyType.diesel, 60);
 			
+			for(Vehicle tempV : allVehicles) {
+				System.out.println(tempV.getClass().getName() + "->" + tempV);
+			}
 			
+			System.out.println("---------------AFTER DELETE-----------");
+			deleteBusById(1);
+			
+			for(Vehicle tempV : allVehicles) {
+				System.out.println(tempV.getClass().getName() + "->" + tempV);
+			}
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			System.out.println();
+			System.out.println(e);
+			e.printStackTrace();
 		}
 		
 
@@ -122,12 +134,24 @@ public class MainService {
 					tempBus.setQuantity(quantity);
 					tempBus.setEnergyType(type);
 					tempBus.setNumberOfSeats(numberOfSeats);
+					return;
 				}
 		}
 		throw new Exception("There is no Bus with " + id + " id" );	
 	}
 	
-	
+	public static void deleteBusById(int id) throws Exception{
+		if(id < 0) throw new Exception("I should be positive");
+		
+		for(int i = 0; i < allVehicles.size(); i++) {
+			if(allVehicles.get(i).getId() == id && allVehicles.get(i) instanceof Bus)
+			{
+				allVehicles.remove(i);
+				return;
+			}
+		}
+		throw new Exception("There is no Bus with " + id + " id" );
+	}
 	
 	
 	
