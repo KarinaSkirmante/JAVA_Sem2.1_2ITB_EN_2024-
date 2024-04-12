@@ -23,14 +23,23 @@ public class Bus extends Vehicle{
 		this.hasBaggageDivision = hasBaggageDivision;
 	}
 	
-
-	
-	
-	
-	
-	
 	//3. constructors
+	public Bus() {
+		super();
+		setNumberOfSeats(50);
+		setHasBaggageDivision(true);
+	}
+	
+	public Bus(String title, float price, int quantity, EnergyType type, int numberOfSeats, boolean hasBaggageDivision )
+	{
+		super(title, price, quantity, type);
+		setNumberOfSeats(numberOfSeats);
+		setHasBaggageDivision(hasBaggageDivision);
+	}
 	
 	//4. toString
+	public String toString() {
+		return super.toString() + " " + numberOfSeats + " " + hasBaggageDivision;
+	}
 	
 }
