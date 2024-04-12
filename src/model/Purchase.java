@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import service.MainService;
+
 public class Purchase {
 	//1.variables
 	private String userCardId;
@@ -64,7 +66,45 @@ public class Purchase {
 	
 	
 	//5. other functions
-	
+	public void addVehicleToShoppingListByVehicleCode(String code, int howMany) throws Exception{
+		if(code == null) throw new Exception("Code is null");
+		
+		for(Vehicle tempV: MainService.allVehicles) {//all vehicles in my shop
+			if(tempV.getCode().equals(code))//this bus or tractor is found
+			{
+				if(tempV.getQuantity()- howMany < 0) {
+					throw new Exception("The quantity is less than You want to buy");
+				}
+				else
+				{
+					if(tempV instanceof Bus)
+					{
+						Bus busFromService = (Bus)tempV;
+						Bus boughtBus = new Bus(busFromService.getTitle(), busFromService.getPrice(),
+								howMany,busFromService.getEnergyType(), busFromService.getNumberOfSeats(),
+								busFromService.isHasBaggageDivision());
+						shoppingList.add(boughtBus);
+					}
+					else if(tempV instanceof Tractor) {
+						Tractor tractorFromService = (Tractor) tempV;
+						Tractor boughtTractor = new Tractor(tractorFromService.getTitle(),
+								tractorFromService.getPrice(),
+								howMany,tractorFromService.getEnergyType(),
+								tractorFromService.getAdditionalTechniques() , 
+								tractorFromService.isOnlyLargeTires());
+						shoppingList.add(boughtTractor);						
+					}
+				
+					
+					
+					tempV.setQuantity(tempV.getQuantity()-howMany);
+				}
+				return;
+			}
+		}
+		
+		
+	}
 	
 	
 	
