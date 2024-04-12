@@ -89,6 +89,18 @@ public abstract class Vehicle {
 		
 	}
 	
+	public Vehicle(int id, String title, float price, int quantity, EnergyType type)
+	{
+		this.id = id;
+		setTitle(title);
+		setCode();
+		setQuantity(quantity);
+		setPrice(price);
+		setEnergyType(type);
+		
+		
+	}
+	
 	//4. toString
 	public String toString()
 	{

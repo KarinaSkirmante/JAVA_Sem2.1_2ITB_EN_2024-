@@ -38,6 +38,14 @@ public class Tractor extends Vehicle{
 		setOnlyLargeTires(isOnlyLargeTires);
 	}
 	
+	public Tractor(int id, String title, float price, int quantity, 
+			EnergyType type, String additionalTechniques, boolean isOnlyLargeTires)
+	{
+		super(id, title, price, quantity, type);
+		setAdditionalTechniques(additionalTechniques);
+		setOnlyLargeTires(isOnlyLargeTires);
+	}
+	
 	
 	//4. toSTring
 	public String toString()

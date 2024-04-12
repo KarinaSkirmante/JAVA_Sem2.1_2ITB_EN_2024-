@@ -37,6 +37,14 @@ public class Bus extends Vehicle{
 		setHasBaggageDivision(hasBaggageDivision);
 	}
 	
+	public Bus(int id, String title, float price, int quantity, EnergyType type, int numberOfSeats, boolean hasBaggageDivision )
+	{
+		super(id, title, price, quantity, type);
+		setNumberOfSeats(numberOfSeats);
+		setHasBaggageDivision(hasBaggageDivision);
+	}
+	
+	
 	//4. toString
 	public String toString() {
 		return super.toString() + " " + numberOfSeats + " " + hasBaggageDivision;

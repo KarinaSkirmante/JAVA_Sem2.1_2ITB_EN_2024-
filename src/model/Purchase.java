@@ -80,23 +80,20 @@ public class Purchase {
 					if(tempV instanceof Bus)
 					{
 						Bus busFromService = (Bus)tempV;
-						Bus boughtBus = new Bus(busFromService.getTitle(), busFromService.getPrice(),
+						Bus boughtBus = new Bus(busFromService.getId(), busFromService.getTitle(), busFromService.getPrice(),
 								howMany,busFromService.getEnergyType(), busFromService.getNumberOfSeats(),
 								busFromService.isHasBaggageDivision());
 						shoppingList.add(boughtBus);
 					}
 					else if(tempV instanceof Tractor) {
 						Tractor tractorFromService = (Tractor) tempV;
-						Tractor boughtTractor = new Tractor(tractorFromService.getTitle(),
+						Tractor boughtTractor = new Tractor(tractorFromService.getId(), tractorFromService.getTitle(),
 								tractorFromService.getPrice(),
 								howMany,tractorFromService.getEnergyType(),
 								tractorFromService.getAdditionalTechniques() , 
 								tractorFromService.isOnlyLargeTires());
 						shoppingList.add(boughtTractor);						
 					}
-				
-					
-					
 					tempV.setQuantity(tempV.getQuantity()-howMany);
 				}
 				return;
@@ -105,6 +102,37 @@ public class Purchase {
 		
 		
 	}
+	
+	public void removeOneVehicleFromMyShoppingList(String code) throws Exception {
+		if(code == null) throw new Exception("Code is null");
+			
+		for(int i = 0; i < shoppingList.size(); i++) {
+			if(shoppingList.get(i).getCode().equals(code)) {
+				if(shoppingList.get(i).getQuantity() > 0)
+					shoppingList.get(i).setQuantity(shoppingList.get(i).getQuantity()-1);
+				
+				for(Vehicle tempV: MainService.allVehicles) {
+					if(tempV.getCode().equals(code)) {
+						tempV.setQuantity(tempV.getQuantity()+1);
+						return;
+					}
+				}
+			}
+		}
+	}
+	public float calculateShoppingListValue() throws Exception{
+		if(shoppingList.isEmpty()) throw new Exception("Shopinglist is empty");
+		
+		float total = 0;
+		
+		for(Vehicle tempV: shoppingList) {
+			total += tempV.getPrice() * tempV.getQuantity();
+		}
+				
+		return total;
+	}
+	
+	
 	
 	
 	

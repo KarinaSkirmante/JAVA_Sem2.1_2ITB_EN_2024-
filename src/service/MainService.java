@@ -31,10 +31,32 @@ public class MainService {
 		}
 		
 		
-		Purchase p1 = new Purchase("12345int id67890", new ArrayList<Vehicle>(Arrays.asList(bus1)));
-		Purchase p2 = new Purchase("1234567899", new ArrayList<Vehicle>(Arrays.asList(bus1, bus2, tractor1)));
+	//	Purchase p1 = new Purchase("1234567890", new ArrayList<Vehicle>(Arrays.asList(bus1)));
+	//	Purchase p2 = new Purchase("1234567899", new ArrayList<Vehicle>(Arrays.asList(bus1, bus2, tractor1)));
+		Purchase p1 = new Purchase("1234567890");
+		try
+		{
+			p1.addVehicleToShoppingListByVehicleCode("0_Mercedes", 1);
+			p1.addVehicleToShoppingListByVehicleCode("2_RAM", 2);
+			
+			System.out.println("---------AFTER BUYING---------");
+			System.out.println(p1.calculateShoppingListValue() + " eur");
+			System.out.println(p1.getShoppingList());
+			
+			System.out.println("---------AFTER DELETING 1 2_RAM TRACTOR---------");
+			p1.removeOneVehicleFromMyShoppingList("2_RAM");
+			System.out.println(p1.calculateShoppingListValue() + " eur");
+			System.out.println(p1.getShoppingList());
+			
+			
+			System.out.println("------------------------------------");
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
 		
-		allPurchases.addAll(Arrays.asList(p1, p2));
+		
+		allPurchases.addAll(Arrays.asList(p1));
 		
 		for(Purchase tempP: allPurchases) {
 			System.out.println(tempP);
@@ -71,7 +93,8 @@ public class MainService {
 			System.out.println(e);
 			e.printStackTrace();
 		}
-		
+		System.out.println("----------------");
+		showVehiclesIfPriceLessThan10000();
 
 	}
 	
@@ -153,7 +176,14 @@ public class MainService {
 		throw new Exception("There is no Bus with " + id + " id" );
 	}
 	
-	
+	public static void showVehiclesIfPriceLessThan10000() {
+		for(Vehicle tempV: allVehicles)
+		{
+			if(tempV.getPrice() < 10000) {
+				System.out.println(tempV);
+			}
+		}
+	}
 	
 	
 
